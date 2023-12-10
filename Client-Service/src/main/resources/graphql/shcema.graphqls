@@ -1,0 +1,21 @@
+#type Query {
+#    listClients : [Client]
+#    ClientById (id : Int) :Client
+#}
+#type Mutation
+#{
+#    addClient (client : ClientRequestDTO): Client
+#}
+#
+#
+#type Client {
+#    id :Int
+#    name  : String
+#    city : String
+#}
+#
+#input ClientRequestDTO
+#{
+#    name :String
+#    city : String
+#}

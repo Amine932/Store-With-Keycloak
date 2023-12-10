@@ -1,0 +1,25 @@
+#type Query {
+#    listProducts: [Product]
+#    ProductById(id : Int): Product
+#}
+#
+#type Mutation {
+#    addProduct(productRequestDTO : ProductRequestDTO): Product
+#    updateProduct(id :Int, productRequestDTO: ProductRequestDTO) : Product
+#    deleteProduct(id : Int ) : Boolean
+#}
+#
+#type Product {
+#    id : Int
+#    brand : String
+#    desc : String
+#    price : Float
+#    quantity : Int
+#}
+#
+#input ProductRequestDTO {
+#    brand : String
+#    desc : String
+#    price : Float
+#    quantity : Int
+#}
