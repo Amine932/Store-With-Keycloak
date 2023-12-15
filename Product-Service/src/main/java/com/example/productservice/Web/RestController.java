@@ -7,6 +7,7 @@ import com.example.productservice.Service.ProductServiceInterface;
 import com.example.productservice.config.GlobalConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class RestController {
     }
 
     @GetMapping("/Products")
+    @PreAuthorize("hasAuthority('admin')")
     public List<ProductResponseDTO> listProduct()
     {
         return productServiceInterface.listProducts();
@@ -44,6 +46,7 @@ public class RestController {
     }
 
     @PutMapping("/Products/{id}")
+
     public void updateProduct(@PathVariable Integer id,@RequestBody ProductRequestDTO productRequestDTO)
     {
         productServiceInterface.updateProduct(id,productRequestDTO);
@@ -51,6 +54,7 @@ public class RestController {
 
 
     @GetMapping("/Products/{id}")
+    @PreAuthorize("hasAuthority('user')")
     public ProductResponseDTO productById(@PathVariable Integer id)
     {
         return  productServiceInterface.productById(id);
