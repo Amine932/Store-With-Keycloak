@@ -20,11 +20,11 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
     private JwtAuthenticationConverter jwtAuthenticationConverter;
     private JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter;
 
-
     public JwtAuthConverter() {
         this.jwtAuthenticationConverter = new JwtAuthenticationConverter();
         this.jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
     }
+
     @Override
     public AbstractAuthenticationToken convert(Jwt jwt) {
         Collection<GrantedAuthority> authorities = extractAuthorities(jwt);

@@ -8,8 +8,11 @@ import com.example.productservice.config.GlobalConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @org.springframework.web.bind.annotation.RestController
@@ -33,9 +36,12 @@ public class RestController {
     }
 
     @GetMapping("/Products")
-    @PreAuthorize("hasAuthority('admin')")
-    public List<ProductResponseDTO> listProduct()
+    @PreAuthorize("hasRole('admin')")
+
+    public List<ProductResponseDTO> listProduct(SecurityContextHolder auth)
     {
+        System.out.println(auth.getClass());
+
         return productServiceInterface.listProducts();
     }
 
@@ -54,7 +60,7 @@ public class RestController {
 
 
     @GetMapping("/Products/{id}")
-    @PreAuthorize("hasAuthority('user')")
+    @PreAuthorize("hasRole('user')")
     public ProductResponseDTO productById(@PathVariable Integer id)
     {
         return  productServiceInterface.productById(id);
